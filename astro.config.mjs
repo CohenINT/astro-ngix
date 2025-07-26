@@ -12,7 +12,7 @@ export default defineConfig({
     react(),
     compress({
       css: true,
-      js: true,
+      js: false,
       svg: true,
       img: true,
       html: true,
