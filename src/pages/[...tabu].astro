@@ -1,0 +1,104 @@
+﻿---
+import MainLayout from '../layouts/MainLayout.astro';
+
+export const prerender = false;
+
+const { tabu } = Astro.params;
+const segments = tabu?.split('/') || [];
+---
+
+<MainLayout title={`Dynamic Tabu Page - ${tabu}`}>
+  <main>
+    <h1>Dynamic Tabu Page</h1>
+    <p class="path">Current path: <span class="highlight">/{tabu}</span></p>
+    
+    {segments.length > 0 && (
+      <div class="segments">
+        <h2>Path Segments:</h2>
+        <ul>
+          {segments.map((segment, index) => (
+            <li>
+              <span class="segment-number">#{index + 1}:</span> {segment}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    
+    <div class="back-link">
+      <a href="/">← Back to Home</a>
+    </div>
+  </main>
+</MainLayout>
+
+<style>
+  main {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 0 1rem;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .path {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .highlight {
+    background-color: #f3f4f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #0f172a;
+  }
+  
+  .segments {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .segments h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #374151;
+  }
+  
+  .segments ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .segments li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .segments li:last-child {
+    border-bottom: none;
+  }
+  
+  .segment-number {
+    font-weight: bold;
+    color: #4b5563;
+  }
+  
+  .back-link {
+    margin-top: 2rem;
+  }
+  
+  .back-link a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+</style>
